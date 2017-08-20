@@ -43,8 +43,6 @@ class BooksApp extends Component {
         <Route path="/search" render={({ history }) => (
           <SearchBooks/>
         )}/>
-        <button onClick={this.addNewBook}>ADD NEW BOOK</button>
-        <button onClick={this.consoleNewBook}>CONSOLE NEW BOOK</button>
 
       </div>
     )

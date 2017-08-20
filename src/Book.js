@@ -12,15 +12,23 @@ class Book extends Component {
 		book : this.props.book
 	}
 
+	changeState = (value) => {
+		return new Promise((resolve, reject) => {
+		this.setState({value: value})
+		resolve(value)
+		})
+	}
+
 	handleChange = (event) => {
-		this.setState({value:event.target.value})
-		this.props.updateStatus(this.state.book.id, event.target.value)
+		this.changeState(event.target.value).then((value) => {
+			console.log(value)
+			this.props.updateStatus(this.props.book.id, value)
+		})
+
 	}
 
 	render() {
 		const { book } = this.props
-		console.log("Image Link", book.imageLinks.smallThumbnail)
-		console.log(book.authors)
 		return (
 			<div className="book">
               <div className="book-top">
