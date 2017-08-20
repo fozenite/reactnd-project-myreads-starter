@@ -7,6 +7,15 @@ class Book extends Component {
 	// static propTypes = {
 	// 	book: PropTypes.object.isRequired
 	// }
+	state = {
+		value: this.props.book.shelf,
+		book : this.props.book
+	}
+
+	handleChange = (event) => {
+		this.setState({value:event.target.value})
+		this.props.updateStatus(this.state.book.id, event.target.value)
+	}
 
 	render() {
 		const { book } = this.props
@@ -17,7 +26,7 @@ class Book extends Component {
               <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${book.imageLinks.smallThumbnail}")` }}></div>
                 <div className="book-shelf-changer">
-                  <select defaultValue={book.shelf}>
+                  <select value={this.state.value} onChange={this.handleChange}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>

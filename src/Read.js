@@ -8,26 +8,24 @@ import Book from './Book'
 class Read extends Component {
 
 	render() {
-		const { books } = this.props
+		const { books, updateStatus } = this.props
 		return (
-				<div className="bookshelf">
-	                  <h2 className="bookshelf-title">Read</h2>
-	                  <div className="bookshelf-books">
-	                    <ol className="books-grid">
-	                    	{books[0] && (books.map((book, index) =>
-	                      		(
-	                      			<li key={index}>
-	                      				<Book book={book}/>
-	                      			</li>
-	                      		)))
-	                  	  	}
-	                    </ol>
-	                  </div>
-	            </div>
+			<div className="bookshelf">
+	         	<h2 className="bookshelf-title">Read</h2>
+	          	<div className="bookshelf-books">
+		            <ol className="books-grid">
+		            	{books[0] && (books.map((book, index) =>
+		              		(
+		              			<li key={index}>
+		              				<Book book={book} updateStatus={updateStatus} />
+		              			</li>
+		              		)))
+		          	  	}
+		            </ol>
+	          	</div>
+            </div>
 		)
 	}
-
-
 }
 
 export default Read

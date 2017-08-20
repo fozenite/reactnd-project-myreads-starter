@@ -7,7 +7,7 @@ import Book from './Book'
 class CurrentlyReading extends Component {
 
 	render() {
-		const { books } = this.props
+		const { books, updateStatus } = this.props
 		return (
 			  <div className="bookshelf">
 	                  <h2 className="bookshelf-title">Currently Reading</h2>
@@ -16,7 +16,7 @@ class CurrentlyReading extends Component {
 	                      	{books[0] && (books.map((book, index) =>
 	                      		(
 	                      			<li key={index}>
-	                      				<Book book={book}/>
+	                      				<Book book={book} updateStatus={updateStatus}/>
 	                      			</li>
 	                      		)))
 	                  		}
