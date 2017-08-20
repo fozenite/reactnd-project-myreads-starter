@@ -17,8 +17,21 @@ class BooksApp extends Component {
   }
 
   componentDidMount() {
-    console.log(BooksAPI.search('ioS',5))
+    console.log(BooksAPI.search('ioS','5'))
   }
+
+  addNewBook = () => {
+    console.log("ADD NEW BOOK")
+    BooksAPI.update({id:"a4MjDAAAQBAJ"}, "read")
+  }
+
+  consoleNewBook = () => {
+    console.log("CONSOLE NEW BOOK")
+    BooksAPI.getAll().then((data) => {
+      console.log(data)
+    })
+  }
+
 
 
   render() {
@@ -30,6 +43,9 @@ class BooksApp extends Component {
         <Route path="/search" render={({ history }) => (
           <SearchBooks/>
         )}/>
+        <button onClick={this.addNewBook}>ADD NEW BOOK</button>
+        <button onClick={this.consoleNewBook}>CONSOLE NEW BOOK</button>
+
       </div>
     )
   }
