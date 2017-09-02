@@ -10,12 +10,25 @@ class SearchBooks extends Component {
   state = {
     books: [],
     shelfBooks:[],
-    shelfAddedToBooks:[]
+    shelfAddedToBooks:[],
+    query:''
   }
 
   componentWillMount() {
-    let unfilteredBooks
-    BooksAPI.search('ioS',2).then((books) => {
+    // let unfilteredBooks
+    // BooksAPI.search('ioS',2).then((books) => {
+    //   console.log('SEARCH BOOKS RESULTS',books)
+    //   this.setState({ books })
+    // })
+    // BooksAPI.getAll().then((shelfBooks) => {
+    //     console.log('SHELF BOOKS RESULTS',shelfBooks)
+    //   this.setState({ shelfBooks })
+    // })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    BooksAPI.search(this.state.query,20).then((books) => {
       console.log('SEARCH BOOKS RESULTS',books)
       this.setState({ books })
     })
@@ -25,19 +38,22 @@ class SearchBooks extends Component {
     })
   }
 
+  updateQuery = (query) => {
+    this.setState({query})
+  }
+
 
   updateStatus = (id, newStatus) => {
     BooksAPI.update({id: id}, newStatus)
     .then((res) =>{
-      BooksAPI.search('ioS',2).then((books) => {
-      console.log('SEARCH BOOKS RESULTS',books)
-      this.setState({ books })
+
     })
-    })
+
   }
 
 	render() {
     let books = this.state.books
+    const { query } = this.state
 		return (
 			<div className="search-books">
             <div className="search-books-bar">
@@ -51,7 +67,14 @@ class SearchBooks extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"/>
+                <form onSubmit={this.handleSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Search by title or author"
+                    value={query}
+                    onChange={(event) => this.updateQuery(event.target.value)}
+                    />
+                </form>
 
               </div>
             </div>
@@ -63,6 +86,8 @@ class SearchBooks extends Component {
 
                                 if(shelfBook.title === book.title) {
                                 book.shelf = shelfBook.shelf
+                                } else {
+                                  book.shelf === 'none'
                                 }
                               })
                               return (<li key={index}>
