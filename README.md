@@ -1,5 +1,5 @@
 ## Introduction
-The goal of this project was to create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read.This project is building of from the Udacity reactnd-project-myreads-starter repo.(see details below)
+The goal of this project was to create a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read.This project is building of from the Udacity reactnd-project-myreads-starter repo(see details below).
 
 ## Requirements
 1. The main page displays a list of "shelves" (i.e. categories), each of which contains a number of books. The three shelves are: Currently Reading, Want to Read, Read.
