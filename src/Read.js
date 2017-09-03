@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './App.css'
-import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class Read extends Component {
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		updateStatus: PropTypes.func.isRequired
+	}
 
 	render() {
 		const { books, updateStatus } = this.props

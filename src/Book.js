@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-import * as BooksAPI from './BooksAPI'
 
 class Book extends Component {
-	// static propTypes = {
-	// 	book: PropTypes.object.isRequired
-	// }
+	static propTypes = {
+		book: PropTypes.object.isRequired,
+		updateStatus: PropTypes.func.isRequired
+	}
 	state = {
 		value: this.props.book.shelf,
 		book : this.props.book
@@ -21,15 +21,12 @@ class Book extends Component {
 
 	handleChange = (event) => {
 		this.changeState(event.target.value).then((value) => {
-			console.log(value)
 			this.props.updateStatus(this.props.book.id, value)
 		})
-
 	}
 
 	render() {
 		const { book } = this.props
-		console.log("THIS BOOK: ",book)
 		let defaultStatusValue = this.state.value ? this.state.value : 'none'
 		return (
 			<div className="book">

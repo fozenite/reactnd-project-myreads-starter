@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
-import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 
 class CurrentlyReading extends Component {
+	static propTypes = {
+		books: PropTypes.array.isRequired,
+		updateStatus: PropTypes.func.isRequired
+	}
 
 	render() {
 		const { books, updateStatus } = this.props

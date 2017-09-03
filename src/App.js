@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Route } from 'react-router-dom'
 import HomePage from './HomePage'
@@ -15,24 +14,6 @@ class BooksApp extends Component {
      */
 
   }
-
-  componentDidMount() {
-    console.log(BooksAPI.search('ioS','5'))
-  }
-
-  addNewBook = () => {
-    console.log("ADD NEW BOOK")
-    BooksAPI.update({id:"a4MjDAAAQBAJ"}, "read")
-  }
-
-  consoleNewBook = () => {
-    console.log("CONSOLE NEW BOOK")
-    BooksAPI.getAll().then((data) => {
-      console.log(data)
-    })
-  }
-
-
 
   render() {
     return (
