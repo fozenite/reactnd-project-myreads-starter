@@ -9,7 +9,8 @@ class SearchBooks extends Component {
   state = {
     books: [],
     shelfBooks:[],
-    query:''
+    query:'',
+    noResults: false
   }
 
 
@@ -23,6 +24,15 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     this.setState({query})
+    query && BooksAPI.search(query,20).then((books) => {
+      if(typeof books[0] !== 'undefined') {
+      this.setState({ books })
+      this.setState({ noResults: false})
+      } else {
+        this.setState({ noResults: true})
+      }
+    })
+
   }
 
 
@@ -40,7 +50,7 @@ class SearchBooks extends Component {
   }
 
 	render() {
-    let { books, shelfBooks } = this.state
+    let { books, shelfBooks, noResults } = this.state
     const { query } = this.state
 		return (
 			<div className="search-books">
@@ -63,12 +73,18 @@ class SearchBooks extends Component {
                     onChange={(event) => this.updateQuery(event.target.value)}
                     />
                 </form>
+                { noResults &&
+              (
+                <p>Your keyword if not supported. Please enter a keyword supported by this database</p>
+              )
+            }
 
               </div>
             </div>
+
             <div className="search-books-results">
               <ol className="books-grid">
-                {books[0] && (books.map((book, index) =>
+                {(typeof books[0] !== 'undefined') && (books.map((book, index) =>
                             {
                               shelfBooks.map((shelfBook, index) => {
 
